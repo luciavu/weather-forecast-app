@@ -1,31 +1,14 @@
 const KILOMETERS = 1000;
-
-// Main Weather info
-const cityInfo = document.querySelector('.city');
-const tempInfo = document.querySelector('.temperature');
-const weatherCondDiv = document.querySelector('.condition');
-const weatherIcon = document.querySelector('.weather-icon');
 const searchButton = document.querySelector('.search button');
 const cityInput = document.querySelector('.search input');
-const countryInfo = document.querySelector('.country');
-const HourlyForecastDiv = document.querySelector('.hourly-forecast');
-const city = cityInput.value;
 
-// Extra Weather info mapping
-const precipitation = document.querySelector('.precip-value');
-const humidity = document.querySelector('.humidity-value');
-const feelsLike = document.querySelector('.feels-like-value');
-const wind = document.querySelector('.wind-value');
-const visibility = document.querySelector('.visibility-value');
-const pressure = document.querySelector('.pressure-value');
-    
-const apiKey = API_KEY;
+const apiKey = YOUR_API_KEY; // Replace with your API key
 
 function loadDefaultWeather() {
     const defaultCity = 'Tokyo'; 
     cityInput.value = defaultCity; 
     getWeather();
-}
+};
 
 function getWeather() {
     const city = cityInput.value;
@@ -63,6 +46,7 @@ function getWeather() {
 };
 
 function displaySummary(data) {
+    const countryInfo = document.querySelector('.country');
     // Get country name using region code
     const regionNames = new Intl.DisplayNames(['en'], {type: 'region'});
     const country = regionNames.of(data.sys.country);
@@ -74,6 +58,11 @@ function displaySummary(data) {
 };
 
 function displayWeather(data) {
+    const cityInfo = document.querySelector('.city');
+    const tempInfo = document.querySelector('.temperature');
+    const weatherCondDiv = document.querySelector('.condition');
+    const weatherIcon = document.querySelector('.weather-icon');
+    
     // Clear previous content
     weatherCondDiv.textContent = '';
     tempInfo.innerHTML = '';
@@ -96,6 +85,14 @@ function displayWeather(data) {
 };
 
 function displayConditions(data) {
+    // Extra Weather info mapping
+    const precipitation = document.querySelector('.precip-value');
+    const humidity = document.querySelector('.humidity-value');
+    const feelsLike = document.querySelector('.feels-like-value');
+    const wind = document.querySelector('.wind-value');
+    const visibility = document.querySelector('.visibility-value');
+    const pressure = document.querySelector('.pressure-value');
+    
     // Retrieve data and format for important fields
     const dataPrecipitation = (data.weather[0].main === 'Rain') ? data.rain['1h'] + 'mm' : `N${'/'}A`;
     const dataHumidity = data.main.humidity + '%';
@@ -114,7 +111,8 @@ function displayConditions(data) {
     
 };
 
-function displayHourlyForecast(hourlyData) {
+function displayHourlyForecast(hourlyData) { 
+    const HourlyForecastDiv = document.querySelector('.hourly-forecast');
     HourlyForecastDiv.innerHTML = ''; // Clear previous content
 
     const next24Hours = hourlyData.slice(0, 6);
