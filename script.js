@@ -1,8 +1,8 @@
+const apiKey = 'YOUR_API_KEY_HERE'; // Replace with your API key
+
 const KILOMETERS = 1000;
 const searchButton = document.querySelector('.search button');
 const cityInput = document.querySelector('.search input');
-
-const apiKey = YOUR_API_KEY; // Replace with your API key
 
 function loadDefaultWeather() {
     const defaultCity = 'Tokyo'; 
