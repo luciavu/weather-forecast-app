@@ -63,11 +63,13 @@ function getWeather() {
 };
 
 function displaySummary(data) {
+    // Get country name using region code
     const regionNames = new Intl.DisplayNames(['en'], {type: 'region'});
     const country = regionNames.of(data.sys.country);
     const minTemp = Math.round(data.main.temp_min);
     const maxTemp = Math.round(data.main.temp_max);
 
+    // Display country, min and max temperature
     countryInfo.textContent = `${country} ${minTemp}°C | ${maxTemp}°C`;
 };
 
@@ -94,6 +96,7 @@ function displayWeather(data) {
 };
 
 function displayConditions(data) {
+    // Retrieve data and format for important fields
     const dataPrecipitation = (data.weather[0].main === 'Rain') ? data.rain['1h'] + 'mm' : `N${'/'}A`;
     const dataHumidity = data.main.humidity + '%';
     const dataFeelsLike = data.main.feels_like + '°C';
@@ -101,6 +104,7 @@ function displayConditions(data) {
     const dataVisibility = data.visibility/KILOMETERS + ' km';
     const dataPressure = data.main.pressure + 'hPa';
 
+    // Set values
     precipitation.textContent = dataPrecipitation;
     humidity.textContent = dataHumidity;
     feelsLike.textContent = dataFeelsLike;
@@ -108,7 +112,7 @@ function displayConditions(data) {
     visibility.textContent = dataVisibility;
     pressure.textContent = dataPressure;
     
-}
+};
 
 function displayHourlyForecast(hourlyData) {
     HourlyForecastDiv.innerHTML = ''; // Clear previous content
